@@ -1,0 +1,13 @@
+log_probs = logistic_pipeline.predict_proba(X)
+log_preds = log_probs[:, 1]
+log_fpr, log_tpr, log_threshold = metrics.roc_curve(y, log_preds)
+log_roc_auc = metrics.auc(log_fpr, log_tpr)
+log_fig = plt.figure(figsize=(3, 4))
+plt.title("Receiver Operating Characteristic")
+plt.plot(log_fpr, log_tpr, "b", label="AUC = %0.2f" % log_roc_auc)
+plt.legend(loc="lower right")
+plt.plot([0, 1], [0, 1], "r--")
+plt.xlim([0, 1])
+plt.ylim([0, 1])
+plt.ylabel("True Positive Rate")
+plt.xlabel("False Positive Rate")

@@ -1,0 +1,13 @@
+svc_probs = svc_pipeline.predict_proba(X)
+svc_preds = svc_probs[:, 1]
+svc_fpr, svc_tpr, svc_threshold = metrics.roc_curve(y, svc_preds)
+svc_roc_auc = metrics.auc(svc_fpr, svc_tpr)
+svc_fig = plt.figure(figsize=(3, 4))
+plt.title("Receiver Operating Characteristic")
+plt.plot(svc_fpr, svc_tpr, "b", label="AUC = %0.2f" % svc_roc_auc)
+plt.legend(loc="lower right")
+plt.plot([0, 1], [0, 1], "r--")
+plt.xlim([0, 1])
+plt.ylim([0, 1])
+plt.ylabel("True Positive Rate")
+plt.xlabel("False Positive Rate")
